@@ -8,7 +8,7 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Defines the Mandrill mail backend.
+ * Defines the Hello World mail backend.
  *
  * @Mail(
  *   id = "hello_world_mail",

@@ -10,6 +10,9 @@ use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\Core\Session\AccountProxyInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * A logger that sends an email when the log type is error.
+ */
 class MailLogger implements LoggerInterface {
 
   use RfcLoggerTrait;

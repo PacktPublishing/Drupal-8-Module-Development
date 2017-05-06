@@ -9,9 +9,7 @@ use Drupal\Core\Logger\LoggerChannelInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class SalutationConfigurationForm
- *
- * @package Drupal\hello_world\Form
+ * Configuration form definition for the salutation message.
  */
 class SalutationConfigurationForm extends ConfigFormBase {
 

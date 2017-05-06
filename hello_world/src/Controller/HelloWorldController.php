@@ -7,9 +7,7 @@ use Drupal\hello_world\HelloWorldSalutation;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class HelloWorldController.
- *
- * @package Drupal\hello_world\Controller
+ * Controller for the salutation message.
  */
 class HelloWorldController extends ControllerBase {
 

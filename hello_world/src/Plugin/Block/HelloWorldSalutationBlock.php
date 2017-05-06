@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\hello_world\HelloWorldSalutation as HelloWorldSalutationService;
 
 /**
- * Provides a 'HelloWorldSalutationBlock' block.
+ * Hello World Salutation block.
  *
  * @Block(
  *  id = "hello_world_salutation_block",
