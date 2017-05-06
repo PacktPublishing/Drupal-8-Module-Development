@@ -91,3 +91,36 @@ function hello_world_tokens($type, $tokens, array $data, array $options, \Drupal
 
   return $replacements;
 }
+
+/**
+ * Implements hook_theme().
+ */
+function hello_world_theme($existing, $type, $theme, $path) {
+  return [
+    'hello_world_salutation' => [
+      'variables' => ['salutation' => NULL, 'target' => NULL, 'overridden' => FALSE],
+    ],
+  ];
+}
+
+/**
+ * Default preprocessor function for the hello_world_salutation theme hook.
+ */
+function template_preprocess_hello_world_salutation(&$variables) {
+  $variables['attributes'] = [
+    'class' => ['salutation'],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function hello_world_theme_suggestions_hello_world_salutation($variables) {
+  $suggestions = [];
+
+  if ($variables['overridden'] == TRUE) {
+    $suggestions[] = 'hello_world_salutation__overridden';
+  }
+
+  return $suggestions;
+}
