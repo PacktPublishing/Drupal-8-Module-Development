@@ -19,7 +19,7 @@ class SalutationConfigurationForm extends ConfigFormBase {
   protected $logger;
 
   /**
-   * Constructs a \Drupal\system\ConfigFormBase object.
+   * SalutationConfigurationForm constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
