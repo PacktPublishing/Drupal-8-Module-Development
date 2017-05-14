@@ -10,3 +10,7 @@ services:
     arguments: ['@logger.log_message_parser', '@config.factory']
     tags:
       - { name: logger }
+  hello_world.config_overrider:
+    class: \Drupal\hello_world\HelloWorldConfigOverrides
+    tags:
+      - {name: config.factory.override, priority: 5}
