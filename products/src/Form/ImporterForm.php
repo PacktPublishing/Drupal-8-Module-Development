@@ -3,6 +3,7 @@
 namespace Drupal\products\Form;
 
 use Drupal\Core\Entity\EntityForm;
+use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\products\Entity\Importer;
@@ -23,9 +24,11 @@ class ImporterForm extends EntityForm {
    * ImporterForm constructor.
    *
    * @param \Drupal\products\Plugin\ImporterManager $importerManager
+   * @param \Drupal\Core\Entity\EntityTypeManager $entityTypeManager
    */
-  public function __construct(ImporterManager $importerManager) {
+  public function __construct(ImporterManager $importerManager, EntityTypeManager $entityTypeManager) {
     $this->importerManager = $importerManager;
+    $this->entityTypeManager = $entityTypeManager;
   }
 
   /**
@@ -33,7 +36,8 @@ class ImporterForm extends EntityForm {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('products.importer_manager')
+      $container->get('products.importer_manager'),
+      $container->get('entity_type.manager')
     );
   }
 
@@ -87,19 +91,27 @@ class ImporterForm extends EntityForm {
       '#required' => TRUE,
     ];
 
-    $form['update_existing'] = array(
+    $form['update_existing'] = [
       '#type' => 'checkbox',
-      '#title' => t('Update existing'),
-      '#description' => t('Whether to update existing products if already imported.'),
+      '#title' => $this->t('Update existing'),
+      '#description' => $this->t('Whether to update existing products if already imported.'),
       '#default_value' => $importer->updateExisting(),
-    );
+    ];
 
-    $form['source'] = array(
+    $form['source'] = [
       '#type' => 'textfield',
-      '#title' => t('Source'),
-      '#description' => t('The source of the products.'),
+      '#title' => $this->t('Source'),
+      '#description' => $this->t('The source of the products.'),
       '#default_value' => $importer->getSource(),
-    );
+    ];
+
+    $form['bundle'] = [
+      '#type' => 'entity_autocomplete',
+      '#target_type' => 'product_type',
+      '#title' => $this->t('Product type'),
+      '#default_value' => $importer->getBundle() ? $this->entityTypeManager->getStorage('product_type')->load($importer->getBundle()) : NULL,
+      '#description' => $this->t('The type of products that need to be created.'),
+    ];
 
     return $form;
   }

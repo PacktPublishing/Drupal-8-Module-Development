@@ -37,4 +37,11 @@ interface ImporterInterface extends ConfigEntityInterface {
    * @return string
    */
   public function getSource();
+
+  /**
+   * Returns the Product type that needs to be created.
+   *
+   * @return string
+   */
+  public function getBundle();
 }

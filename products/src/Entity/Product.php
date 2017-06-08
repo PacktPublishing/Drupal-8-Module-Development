@@ -14,6 +14,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  * @ContentEntityType(
  *   id = "product",
  *   label = @Translation("Product"),
+ *   bundle_label = @Translation("Product type"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\products\ProductListBuilder",
@@ -34,14 +35,18 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "id" = "id",
  *     "label" = "name",
  *     "uuid" = "uuid",
+ *     "bundle" = "type",
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/product/{product}",
- *     "add-form" = "/admin/structure/product/add",
+ *     "add-page" = "/admin/structure/product/add",
+ *     "add-form" = "/admin/structure/product/add/{product_type}",
  *     "edit-form" = "/admin/structure/product/{product}/edit",
  *     "delete-form" = "/admin/structure/product/{product}/delete",
  *     "collection" = "/admin/structure/product",
- *   }
+ *   },
+ *   bundle_entity_type = "product_type",
+ *   field_ui_base_route = "entity.product_type.edit_form"
  * )
  */
 class Product extends ContentEntityBase implements ProductInterface {

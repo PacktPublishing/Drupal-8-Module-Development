@@ -1,5 +1,5 @@
-entity.product.add_form:
-  route_name: entity.product.add_form
+entity.product.add_page:
+  route_name: entity.product.add_page
   title: 'Add Product'
   appears_on:
     - entity.product.collection
@@ -8,3 +8,8 @@ entity.importer.add_form:
   title: 'Add Importer'
   appears_on:
     - entity.importer.collection
+entity.product_type.add_form:
+  route_name: 'entity.product_type.add_form'
+  title: 'Add Product type'
+  appears_on:
+    - entity.product_type.collection

@@ -62,7 +62,8 @@ class JsonImporter extends ImporterBase {
     if (!$existing) {
       $values = [
         'remote_id' => $data->id,
-        'source' => $config->getSource()
+        'source' => $config->getSource(),
+        'type' => $config->getBundle(),
       ];
       /** @var ProductInterface $product */
       $product = $this->entityTypeManager->getStorage('product')->create($values);
