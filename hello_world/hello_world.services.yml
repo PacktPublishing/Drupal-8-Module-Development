@@ -14,3 +14,8 @@ services:
     class: \Drupal\hello_world\HelloWorldConfigOverrides
     tags:
       - {name: config.factory.override, priority: 5}
+  hello_world.redirect_subscriber:
+    class: \Drupal\hello_world\EventSubscriber\HelloWorldRedirectSubscriber
+    arguments: ['@current_user', '@current_route_match']
+    tags:
+      - {name: event_subscriber}
