@@ -45,7 +45,7 @@ class JsonImporter extends ImporterBase {
     /** @var ImporterInterface $config */
     $config = $this->configuration['config'];
     $request = $this->httpClient->get($config->getUrl()->toString());
-    $string = $request->getBody()->getContents();
+    $string = $request->getBody();
     return json_decode($string);
   }
 
