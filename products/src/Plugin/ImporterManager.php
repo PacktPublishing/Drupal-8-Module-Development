@@ -56,4 +56,29 @@ class ImporterManager extends DefaultPluginManager {
 
     return $this->createInstance($config->getPluginId(), ['config' => $config]);
   }
+
+  /**
+   * Creates an array of ImporterInterface from all the existing Importer
+   * configuration entities.
+   *
+   * @return ImporterPluginInterface[]
+   */
+  public function createInstanceFromAllConfigs() {
+    $configs = $this->entityTypeManager->getStorage('importer')->loadMultiple();
+    if (!$configs) {
+      return [];
+    }
+    $plugins = [];
+    /** @var ImporterInterface $config */
+    foreach ($configs as $config) {
+      $plugin = $this->createInstanceFromConfig($config->id());
+      if (!$plugin) {
+        continue;
+      }
+
+      $plugins[] = $plugin;
+    }
+
+    return $plugins;
+  }
 }
