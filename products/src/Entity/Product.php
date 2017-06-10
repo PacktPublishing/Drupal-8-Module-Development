@@ -137,59 +137,59 @@ class Product extends ContentEntityBase implements ProductInterface {
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Product.'))
-      ->setSettings(array(
+      ->setSettings([
         'max_length' => 255,
         'text_processing' => 0,
-      ))
+      ])
       ->setDefaultValue('')
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'string',
         'weight' => -4,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => -4,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['number'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Number'))
       ->setDescription(t('The Product number.'))
-      ->setSettings(array(
+      ->setSettings([
         'min' => 1,
         'max' => 10000
-      ))
+      ])
       ->setDefaultValue(NULL)
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'number_unformatted',
         'weight' => -4,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'number',
         'weight' => -4,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['remote_id'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Remote ID'))
       ->setDescription(t('The remote ID of the Product.'))
-      ->setSettings(array(
+      ->setSettings([
         'max_length' => 255,
         'text_processing' => 0,
-      ))
+      ])
       ->setDefaultValue('');
 
     $fields['source'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Source'))
       ->setDescription(t('The source of the Product.'))
-      ->setSettings(array(
+      ->setSettings([
         'max_length' => 255,
         'text_processing' => 0,
-      ))
+      ])
       ->setDefaultValue('');
 
     $fields['created'] = BaseFieldDefinition::create('created')
