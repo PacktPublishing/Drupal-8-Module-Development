@@ -30,9 +30,9 @@ class ProductListBuilder extends EntityListBuilder {
     $row['name'] = Link::fromTextAndUrl(
       $entity->label(),
       new Url(
-        'entity.product.canonical', array(
+        'entity.product.canonical', [
           'product' => $entity->id(),
-        )
+        ]
       )
     );
     return $row + parent::buildRow($entity);
