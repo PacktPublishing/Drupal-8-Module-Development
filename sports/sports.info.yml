@@ -1,0 +1,4 @@
+name: Sports
+description: Sports module
+core: 8.x
+type: module
