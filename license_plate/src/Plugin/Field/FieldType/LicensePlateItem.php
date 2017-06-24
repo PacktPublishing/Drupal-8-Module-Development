@@ -84,6 +84,31 @@ class LicensePlateItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
+  public static function defaultFieldSettings() {
+    return [
+        'codes' => '',
+      ] + parent::defaultFieldSettings();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
+    $element = [];
+
+    $element['codes'] = [
+      '#title' => $this->t('Licence plate codes'),
+      '#type' => 'textarea',
+      '#default_value' => $this->getSetting('codes'),
+      '#description' => t('If you want the field to be have a select list with license plate codes instead of a textfield, please provide the available codes. Each code on a new line.')
+    ];
+
+    return $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     $properties['number'] = DataDefinition::create('string')
       ->setLabel(t('Plate number'));

@@ -119,16 +119,7 @@ class DefaultLicensePlateWidget extends WidgetBase {
     ] + $element;
 
     $placeholder_settings = $this->getSetting('placeholder');
-    $element['details']['code'] = [
-      '#type' => 'textfield',
-      '#title' => t('Plate code'),
-      '#default_value' => isset($items[$delta]->code) ? $items[$delta]->code : NULL,
-      '#size' => $this->getSetting('code_size'),
-      '#placeholder' => $placeholder_settings['code'],
-      '#maxlength' => $this->getFieldSetting('code_max_length'),
-      '#description' => '',
-      '#required' => $element['#required'],
-    ];
+    $this->addCodeField($element, $items, $delta, $placeholder_settings);
 
     $element['details']['number'] = [
       '#type' => 'textfield',
@@ -157,4 +148,37 @@ class DefaultLicensePlateWidget extends WidgetBase {
     return $values;
   }
 
+  /**
+   * Adds the license plate code field to the form element
+   *
+   * @param $element
+   * @param \Drupal\Core\Field\FieldItemListInterface $items
+   * @param $delta
+   * @param $placeholder_settings
+   */
+  protected function addCodeField(&$element, FieldItemListInterface $items, $delta, $placeholder_settings) {
+    $element['details']['code'] = [
+      '#title' => t('Plate code'),
+      '#default_value' => isset($items[$delta]->code) ? $items[$delta]->code : NULL,
+      '#description' => '',
+      '#required' => $element['#required'],
+    ];
+
+    $codes = $this->getFieldSetting('codes');
+    if (!$codes) {
+      $element['details']['code'] += [
+        '#type' => 'textfield',
+        '#placeholder' => $placeholder_settings['code'],
+        '#maxlength' => $this->getFieldSetting('code_max_length'),
+        '#size' => $this->getSetting('code_size'),
+      ];
+      return;
+    }
+
+    $codes = explode("\r\n", $codes);
+    $element['details']['code'] += [
+      '#type' => 'select',
+      '#options' => array_combine($codes, $codes),
+    ];
+  }
 }
