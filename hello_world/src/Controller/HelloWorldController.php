@@ -2,7 +2,11 @@
 
 namespace Drupal\hello_world\Controller;
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultInterface;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
 use Drupal\hello_world\HelloWorldSalutation;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -41,6 +45,23 @@ class HelloWorldController extends ControllerBase {
    */
   public function helloWorld() {
     return $this->salutation->getSalutationComponent();
+  }
+
+  /**
+   * Handles the access checking. It's not actually used anywhere anymore
+   * since we opted for the service-based approach so this method is no longer
+   * referenced in the route definition.
+   *
+   * @param AccountInterface $account
+   *
+   * @return AccessResultInterface
+   */
+  public function access(AccountInterface $account) {
+    $url = Url::fromRoute('hello_world.hello');
+    if ($url->access()) {
+      // Do something.
+    }
+    return in_array('editor', $account->getRoles()) ? AccessResult::forbidden() : AccessResult::allowed();
   }
 
 }

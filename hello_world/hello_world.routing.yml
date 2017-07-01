@@ -4,7 +4,7 @@ hello_world.hello:
     _controller: '\Drupal\hello_world\Controller\HelloWorldController::helloWorld'
     _title: 'Our first route'
   requirements:
-    _permission: 'access content'
+    _hello_world_access_check: 'TRUE'
 
 hello_world.greeting_form:
   path: '/admin/config/salutation-configuration'

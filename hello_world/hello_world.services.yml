@@ -19,3 +19,8 @@ services:
     arguments: ['@current_user', '@current_route_match']
     tags:
       - {name: event_subscriber}
+  hello_world.access_checker:
+    class: \Drupal\hello_world\Access\HelloWorldAccess
+    arguments: ['@config.factory']
+    tags:
+      - { name: access_check, applies_to: _hello_world_access_check }
