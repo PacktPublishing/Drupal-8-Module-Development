@@ -27,7 +27,8 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     },
  *    "route_provider" = {
  *      "html" = "Drupal\Core\Entity\Routing\AdminHtmlRouteProvider"
- *    }
+ *    },
+ *   "access" = "Drupal\products\Access\ProductAccessControlHandler",
  *   },
  *   base_table = "product",
  *   admin_permission = "administer site configuration",
