@@ -24,3 +24,7 @@ services:
     arguments: ['@config.factory']
     tags:
       - { name: access_check, applies_to: _hello_world_access_check }
+  hello_world.route_subscriber:
+    class: Drupal\hello_world\Routing\HelloWorldRouteSubscriber
+    tags:
+      - { name: event_subscriber }
