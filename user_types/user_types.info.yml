@@ -1,0 +1,4 @@
+name: User Types
+description: Example module for user access
+core: 8.x
+type: module
