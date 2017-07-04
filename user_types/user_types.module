@@ -29,10 +29,6 @@ function user_types_node_grants(\Drupal\Core\Session\AccountInterface $account, 
     return [];
   }
 
-  if ($op !== 'view') {
-    return [];
-  }
-
   $user = \Drupal::entityTypeManager()->getStorage('user')->load($account->id());
   $user_type = $user->get('field_user_type')->value;
   if (!$user_type) {
@@ -58,7 +54,7 @@ function user_types_node_access_records(\Drupal\node\NodeInterface $node) {
     return [];
   }
 
-  $map = [
+  $view_map = [
     'article' => [
       'employee',
       'manager',
@@ -70,7 +66,21 @@ function user_types_node_access_records(\Drupal\node\NodeInterface $node) {
     ]
   ];
 
-  $user_types = $map[$node->bundle()];
+  if (!$node->isPublished()) {
+    unset($view_map['article'][0]);
+  }
+
+  $manage_map = [
+    'article' => [
+      'manager',
+    ],
+    'page' => [
+      'manager',
+    ]
+  ];
+
+  $user_types = $view_map[$node->bundle()];
+  $manage_user_types = $manage_map[$node->bundle()];
   $grants = [];
 
   foreach ($user_types as $user_type) {
@@ -78,8 +88,8 @@ function user_types_node_access_records(\Drupal\node\NodeInterface $node) {
       'realm' => 'user_type',
       'gid' => user_types_grant_mapping($user_type),
       'grant_view' => 1,
-      'grant_update' => 0,
-      'grant_delete' => 0,
+      'grant_update' => in_array($user_type, $manage_user_types) ? 1 : 0,
+      'grant_delete' => in_array($user_type, $manage_user_types) ? 1 : 0,
     ];
   }
 
