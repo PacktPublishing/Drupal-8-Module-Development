@@ -62,6 +62,9 @@ class HelloWorldSalutation {
             'route_parameters' => []
           ],
         ]
+      ],
+      '#cache' => [
+        'max-age' => 0
       ]
     ];
 
