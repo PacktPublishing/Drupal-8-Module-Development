@@ -16,35 +16,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class HelloWorldController extends ControllerBase {
 
   /**
-   * @var \Drupal\hello_world\HelloWorldSalutation
-   */
-  protected $salutation;
-
-  /**
-   * HelloWorldController constructor.
-   *
-   * @param \Drupal\hello_world\HelloWorldSalutation $salutation
-   */
-  public function __construct(HelloWorldSalutation $salutation) {
-    $this->salutation = $salutation;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('hello_world.salutation')
-    );
-  }
-
-  /**
    * Hello World.
    *
    * @return array
    */
   public function helloWorld() {
-    return $this->salutation->getSalutationComponent();
+    return [
+      '#lazy_builder' => ['hello_world.lazy_builder:renderSalutation', []],
+      '#create_placeholder' => TRUE,
+    ];
   }
 
   /**

@@ -28,3 +28,6 @@ services:
     class: Drupal\hello_world\Routing\HelloWorldRouteSubscriber
     tags:
       - { name: event_subscriber }
+  hello_world.lazy_builder:
+    class: Drupal\hello_world\HelloWorldLazyBuilder
+    arguments: ['@hello_world.salutation']
