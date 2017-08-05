@@ -1,5 +1,7 @@
 (function (Drupal, $) {
 
+  "use strict";
+
   Drupal.behaviors.helloWorldClock = {
     attach: function (context, settings) {
       function ticker() {
