@@ -13,3 +13,10 @@ hello_world.greeting_form:
     _title: 'Salutation configuration'
   requirements:
     _permission: 'administer site configuration'
+
+hello_world.hide_block:
+  path: '/hide-block'
+  defaults:
+    _controller: '\Drupal\hello_world\Controller\HelloWorldController::hideBlock'
+  requirements:
+    _permission: 'access content'

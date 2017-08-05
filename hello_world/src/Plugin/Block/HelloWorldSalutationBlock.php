@@ -4,6 +4,7 @@ namespace Drupal\hello_world\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\hello_world\HelloWorldSalutation as HelloWorldSalutationService;
 
@@ -56,8 +57,23 @@ class HelloWorldSalutationBlock extends BlockBase implements ContainerFactoryPlu
    * {@inheritdoc}
    */
   public function build() {
-    return [
-      '#markup' => $this->salutation->getSalutation(),
+    $build = [];
+
+    $build[] = [
+      '#theme' => 'container',
+      '#children' => [
+        '#markup' => $this->salutation->getSalutation(),
+      ]
     ];
+
+    $url = Url::fromRoute('hello_world.hide_block');
+    $url->setOption('attributes', ['class' => 'use-ajax']);
+    $build[] = [
+      '#type' => 'link',
+      '#url' => $url,
+      '#title' => $this->t('Remove'),
+    ];
+
+    return $build;
   }
 }
