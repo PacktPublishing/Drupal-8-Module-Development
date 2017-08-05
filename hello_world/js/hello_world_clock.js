@@ -8,6 +8,9 @@
       }
 
       var clock = '<div>The time is <span class="clock"></span></div>';
+      if (settings.hello_world != undefined && settings.hello_world.hello_world_clock.afternoon != undefined) {
+        clock += 'Are you having a nice day?';
+      }
 
       $(context).find('.salutation').once('helloWorldClock').append(clock);
 
