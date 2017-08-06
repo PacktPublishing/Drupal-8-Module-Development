@@ -22,4 +22,13 @@ interface ImporterInterface extends PluginInspectionInterface {
    * @return \Drupal\products\Entity\ImporterInterface
    */
   public function getConfig();
+
+  /**
+   * Returns the form array for configuring this plugin.
+   *
+   * @param \Drupal\products\Entity\ImporterInterface $importer
+   *
+   * @return array
+   */
+  public function getConfigurationForm(\Drupal\products\Entity\ImporterInterface $importer);
 }

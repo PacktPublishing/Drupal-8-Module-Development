@@ -10,12 +10,11 @@ products.importer.*:
       label: 'Label'
     uuid:
       type: string
-    url:
-      type: uri
-      label: Uri
     plugin:
       type: string
       label: Plugin ID
+    plugin_configuration:
+      type: products.importer.plugin.[%parent.plugin]
     update_existing:
       type: boolean
       label: Whether to update existing products
@@ -25,3 +24,15 @@ products.importer.*:
     bundle:
       type: string
       label: The product bundle
+
+products.importer.plugin.*:
+  type: mapping
+  label: 'Plugin configuration'
+
+products.importer.plugin.json:
+  type: mapping
+  label: Plugin configuration for the Json importer plugin
+  mapping:
+    url:
+      type: uri
+      label: Uri
