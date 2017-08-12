@@ -9,6 +9,7 @@
         $(context).find('.clock').html(date.toLocaleTimeString());
       }
 
+      // @TODO Incorrect string output. Need to ensure they can be translatable.
       var clock = '<div>The time is <span class="clock"></span></div>';
       if (settings.hello_world != undefined && settings.hello_world.hello_world_clock.afternoon != undefined) {
         clock += 'Are you having a nice day?';
