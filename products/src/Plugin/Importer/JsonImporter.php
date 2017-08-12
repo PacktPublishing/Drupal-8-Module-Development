@@ -45,9 +45,14 @@ class JsonImporter extends ImporterBase {
    * @return \stdClass
    */
   private function getData() {
-    /** @var ImporterInterface $config */
-    $config = $this->configuration['config'];
-    $request = $this->httpClient->get($config->getUrl()->toString());
+    /** @var ImporterInterface $importer_config */
+    $importer_config = $this->configuration['config'];
+    $config = $importer_config->getPluginConfiguration();
+    $url = isset($config['url']) ? $config['url'] : NULL;
+    if (!$url) {
+      return NULL;
+    }
+    $request = $this->httpClient->get($url);
     $string = $request->getBody();
     return json_decode($string);
   }
