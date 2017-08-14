@@ -4,6 +4,7 @@ namespace Drupal\products\Plugin;
 
 use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Component\Plugin\PluginBase;
+use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\products\Entity\ImporterInterface;
@@ -15,6 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Base class for Importer plugins.
  */
 abstract class ImporterBase extends PluginBase implements ImporterPluginInterface, ContainerFactoryPluginInterface {
+
+  use DependencySerializationTrait;
 
   /**
    * @var \Drupal\Core\Entity\EntityTypeManager

@@ -56,6 +56,7 @@ function products_products_import_run() {
  */
 function _products_products_import_run_plugin(\Drupal\products\Plugin\ImporterInterface $plugin) {
   $result = $plugin->import();
+  drush_backend_batch_process();
   $message_values = ['@importer' => $plugin->getConfig()->label()];
   $message = $result ? t('The "@importer" importer has been run.', $message_values) : t('There was a problem running the "@importer" importer.', $message_values);
   $message_status = $result ? 'success' : 'error';
