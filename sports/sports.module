@@ -45,5 +45,21 @@ function sports_views_data() {
     ),
   );
 
+  $data['players']['name'] = array(
+    'title' => t('Name'),
+    'help' => t('The name of the player.'),
+    'field' => array(
+      'id' => 'standard',
+    ),
+  );
+
+  $data['players']['data'] = array(
+    'title' => t('Data'),
+    'help' => t('The player data.'),
+    'field' => array(
+      'id' => 'serialized',
+    ),
+  );
+
   return $data;
 }
