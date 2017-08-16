@@ -14,6 +14,15 @@ class ProductViewsData extends EntityViewsData {
    */
   public function getViewsData() {
     $data = parent::getViewsData();
+
+    $data['product']['importer'] = [
+      'title' => t('Importer'),
+      'help' => t('Information about the Product importer.'),
+      'field' => array(
+        'id' => 'product_importer',
+      ),
+    ];
+
     return $data;
   }
 }
