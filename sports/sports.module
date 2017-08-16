@@ -73,6 +73,9 @@ function sports_views_data() {
       'id' => 'standard',
       'label' => t('Player team'),
     ),
+    'argument' => array(
+      'id' => 'numeric',
+    ),
   );
 
   // Teams table
@@ -85,6 +88,12 @@ function sports_views_data() {
     'help' => t('The name of the team.'),
     'field' => array(
       'id' => 'standard',
+    ),
+    'sort' => array(
+      'id' => 'standard',
+    ),
+    'filter' => array(
+      'id' => 'string',
     ),
   );
 
