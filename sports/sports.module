@@ -61,5 +61,40 @@ function sports_views_data() {
     ),
   );
 
+  $data['players']['team_id'] = array(
+    'title' => t('Team ID'),
+    'help' => t('The unique team ID of the player.'),
+    'field' => array(
+      'id' => 'numeric',
+    ),
+    'relationship' => array(
+      'base' => 'teams',
+      'base field' => 'id',
+      'id' => 'standard',
+      'label' => t('Player team'),
+    ),
+  );
+
+  // Teams table
+  $data['teams'] = [];
+  $data['teams']['table']['group'] = t('Sports');
+
+  // Teams fields
+  $data['teams']['name'] = array(
+    'title' => t('Name'),
+    'help' => t('The name of the team.'),
+    'field' => array(
+      'id' => 'standard',
+    ),
+  );
+
+  $data['teams']['description'] = array(
+    'title' => t('Description'),
+    'help' => t('The description of the team.'),
+    'field' => array(
+      'id' => 'standard',
+    ),
+  );
+
   return $data;
 }
