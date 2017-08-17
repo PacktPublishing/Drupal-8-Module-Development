@@ -1,0 +1,7 @@
+views.field.product_importer:
+  type: views_field
+  label: 'Product Importer'
+  mapping:
+    importer:
+      type: string
+      label: 'Which importer label to use: entity or plugin'
