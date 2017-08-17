@@ -1,0 +1,6 @@
+views.filter_value.team_filter:
+  type: sequence
+  label: 'Teams'
+  sequence:
+    type: string
+    label: 'Team'

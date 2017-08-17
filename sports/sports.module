@@ -93,7 +93,7 @@ function sports_views_data() {
       'id' => 'standard',
     ),
     'filter' => array(
-      'id' => 'string',
+      'id' => 'team_filter',
     ),
   );
 
