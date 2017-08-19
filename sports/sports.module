@@ -105,5 +105,13 @@ function sports_views_data() {
     ),
   );
 
+  $data['teams']['team'] = array(
+    'title' => t('Team'),
+    'help' => t('The team (either an ID or a team name).'),
+    'argument' => array(
+      'id' => 'team',
+    ),
+  );
+
   return $data;
 }
