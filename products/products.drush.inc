@@ -55,10 +55,19 @@ function products_products_import_run() {
  * @param \Drupal\products\Plugin\ImporterInterface $plugin
  */
 function _products_products_import_run_plugin(\Drupal\products\Plugin\ImporterInterface $plugin) {
+  $lock = \Drupal::lock();
+if (!$lock->acquire($plugin->getPluginId())) {
+  drupal_set_message(t('The plugin %plugin is already running. Waiting for it to finish.', ['%plugin' => $plugin->getPluginDefinition()['label']]));
+  if ($lock->wait($plugin->getPluginId())) {
+    drupal_set_message(t('The wait is killing me. Giving up.'));
+    return;
+  }
+}
   $result = $plugin->import();
   drush_backend_batch_process();
   $message_values = ['@importer' => $plugin->getConfig()->label()];
   $message = $result ? t('The "@importer" importer has been run.', $message_values) : t('There was a problem running the "@importer" importer.', $message_values);
   $message_status = $result ? 'success' : 'error';
   drupal_set_message($message, $message_status);
+  $lock->release($plugin->getPluginId());
 }
