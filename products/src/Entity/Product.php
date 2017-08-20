@@ -117,6 +117,21 @@ class Product extends ContentEntityBase implements ProductInterface {
   /**
    * {@inheritdoc}
    */
+  public function getImage() {
+    return $this->get('image')->entity;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setImage($image) {
+    $this->set('image', $image);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCreatedTime() {
     return $this->get('created')->value;
   }
@@ -192,6 +207,14 @@ class Product extends ContentEntityBase implements ProductInterface {
         'text_processing' => 0,
       ])
       ->setDefaultValue('');
+
+    $fields['image'] = BaseFieldDefinition::create('image')
+      ->setLabel(t('Image'))
+      ->setDescription(t('The product image.'))
+      ->setDisplayOptions('form', array(
+        'type' => 'image_image',
+        'weight' => 5,
+      ));
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))

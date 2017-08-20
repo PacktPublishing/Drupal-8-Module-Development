@@ -187,6 +187,7 @@ class JsonImporter extends ImporterBase {
       $product->setName($data->name);
       $product->setProductNumber($data->number);
       $product->save();
+      $this->handleProductImage($data, $product);
       return;
     }
 
@@ -198,7 +199,34 @@ class JsonImporter extends ImporterBase {
     $product = reset($existing);
     $product->setName($data->name);
     $product->setProductNumber($data->number);
+    $this->handleProductImage($data, $product);
     $product->save();
+  }
+
+  /**
+   * Imports the image of the product and adds it to the Product entity.
+   *
+   * @param $data
+   * @param ProductInterface $product
+   */
+  private function handleProductImage($data, ProductInterface $product) {
+    $name = $data->image;
+    // This needs to be hardcoded for the moment.
+    $image_path = '';
+    $image = file_get_contents($image_path . '/' . $name);
+    if (!$image) {
+      // Perhaps log something.
+      return;
+    }
+
+    /** @var \Drupal\file\FileInterface $file */
+    $file = file_save_data($image, 'public://product_images/' . $name, FILE_EXISTS_REPLACE);
+    if (!$file) {
+      // Something went wrong, perhaps log it.
+      return;
+    }
+
+    $product->setImage($file->id());
   }
 
   /**
