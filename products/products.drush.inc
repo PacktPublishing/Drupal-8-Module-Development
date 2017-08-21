@@ -41,7 +41,7 @@ function products_products_import_run() {
     drupal_set_message(t('There are no importers to run'), 'error');
     return;
   }
-
+  
   foreach ($plugins as $plugin) {
     _products_products_import_run_plugin($plugin);
   }
@@ -64,9 +64,6 @@ function _products_products_import_run_plugin(\Drupal\products\Plugin\ImporterIn
     }
   }
   $result = $plugin->import();
-  if (batch_get()) {
-    drush_backend_batch_process();
-  }
 
   $message_values = ['@importer' => $plugin->getConfig()->label()];
   $message = $result ? t('The "@importer" importer has been run.', $message_values) : t('There was a problem running the "@importer" importer.', $message_values);

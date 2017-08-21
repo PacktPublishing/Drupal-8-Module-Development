@@ -42,6 +42,9 @@ class JsonImporter extends ImporterBase {
       'finished' => [$this, 'importProductsFinished'],
     ];
     batch_set($batch);
+    if (PHP_SAPI == 'cli') {
+      drush_backend_batch_process();
+    }
 
     return TRUE;
   }
