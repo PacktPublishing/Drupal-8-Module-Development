@@ -103,6 +103,10 @@ class CsvImporter extends ImporterBase {
         continue;
       }
 
+      if ($row[0] == "") {
+        continue;
+      }
+
       $product = new \stdClass();
       foreach ($header as $header_key => $label) {
         $product->{$label} = $row[$header_key];
@@ -121,7 +125,6 @@ class CsvImporter extends ImporterBase {
   private function persistProduct($data) {
     /** @var ImporterInterface $config */
     $config = $this->configuration['config'];
-
     $existing = $this->entityTypeManager->getStorage('product')->loadByProperties(['remote_id' => $data->id, 'source' => $config->getSource()]);
     if (!$existing) {
       $values = [
