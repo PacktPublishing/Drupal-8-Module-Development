@@ -186,8 +186,8 @@ class JsonImporter extends ImporterBase {
       $product = $this->entityTypeManager->getStorage('product')->create($values);
       $product->setName($data->name);
       $product->setProductNumber($data->number);
-      $product->save();
       $this->handleProductImage($data, $product);
+      $product->save();
       return;
     }
 
