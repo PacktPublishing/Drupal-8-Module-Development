@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for the Importer config entity type.
+ */
+function products_importer_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getPluginId() != 'csv') {
+    return;
+  }
+
+  // Mark the current File as being used.
+  $fids = $entity->getPluginConfiguration()['file'];
+  $fid = reset($fids);
+  $file = Drupal::entityTypeManager()->getStorage('file')->load($fid);
+  \Drupal::service('file.usage')->add($file, 'products', 'config:importer', $entity->id());
+
+  // If the file was changed, un-mark the old one as being used.
+  if ($entity->isNew()) {
+    return;
+  }
+
+  /** @var \Drupal\products\Entity\ImporterInterface $original */
+  $original = $entity->original;
+  $original_fids = $original->getPluginConfiguration()['file'];
+  $original_fid = reset($original_fids);
+  if ($original_fid !== $fid) {
+    $original_file = Drupal::entityTypeManager()->getStorage('file')->load($original_fid);
+    \Drupal::service('file.usage')->delete($original_file, 'products', 'config:importer', $entity->id());
+  }
+
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete() for the Importer config entity type.
+ */
+function products_importer_delete(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getPluginId() != 'csv') {
+    return;
+  }
+
+  $fids = $entity->getPluginConfiguration()['file'];
+  $fid = reset($fids);
+  $file = Drupal::entityTypeManager()->getStorage('file')->load($fid);
+  \Drupal::service('file.usage')->delete($file, 'products', 'config:importer', $entity->id());
+}
