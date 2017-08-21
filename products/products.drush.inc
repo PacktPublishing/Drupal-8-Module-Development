@@ -57,9 +57,9 @@ function products_products_import_run() {
 function _products_products_import_run_plugin(\Drupal\products\Plugin\ImporterInterface $plugin) {
   $lock = \Drupal::lock();
   if (!$lock->acquire($plugin->getPluginId())) {
-    drupal_set_message(t('The plugin %plugin is already running. Waiting for it to finish.', ['%plugin' => $plugin->getPluginDefinition()['label']]));
+    drush_log(t('The plugin %plugin is already running. Waiting for it to finish.', ['%plugin' => $plugin->getPluginDefinition()['label']]));
     if ($lock->wait($plugin->getPluginId())) {
-      drupal_set_message(t('The wait is killing me. Giving up.'));
+      drush_log(t('The wait is killing me. Giving up.'));
       return;
     }
   }
@@ -71,6 +71,6 @@ function _products_products_import_run_plugin(\Drupal\products\Plugin\ImporterIn
   $message_values = ['@importer' => $plugin->getConfig()->label()];
   $message = $result ? t('The "@importer" importer has been run.', $message_values) : t('There was a problem running the "@importer" importer.', $message_values);
   $message_status = $result ? 'success' : 'error';
-  drupal_set_message($message, $message_status);
+  drush_log($message, $message_status);
   $lock->release($plugin->getPluginId());
 }
