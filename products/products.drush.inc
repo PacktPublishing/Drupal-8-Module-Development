@@ -64,7 +64,10 @@ if (!$lock->acquire($plugin->getPluginId())) {
   }
 }
   $result = $plugin->import();
-  drush_backend_batch_process();
+  if (batch_get()) {
+    drush_backend_batch_process();
+  }
+
   $message_values = ['@importer' => $plugin->getConfig()->label()];
   $message = $result ? t('The "@importer" importer has been run.', $message_values) : t('There was a problem running the "@importer" importer.', $message_values);
   $message_status = $result ? 'success' : 'error';
