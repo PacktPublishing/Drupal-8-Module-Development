@@ -56,13 +56,13 @@ function products_products_import_run() {
  */
 function _products_products_import_run_plugin(\Drupal\products\Plugin\ImporterInterface $plugin) {
   $lock = \Drupal::lock();
-if (!$lock->acquire($plugin->getPluginId())) {
-  drupal_set_message(t('The plugin %plugin is already running. Waiting for it to finish.', ['%plugin' => $plugin->getPluginDefinition()['label']]));
-  if ($lock->wait($plugin->getPluginId())) {
-    drupal_set_message(t('The wait is killing me. Giving up.'));
-    return;
+  if (!$lock->acquire($plugin->getPluginId())) {
+    drupal_set_message(t('The plugin %plugin is already running. Waiting for it to finish.', ['%plugin' => $plugin->getPluginDefinition()['label']]));
+    if ($lock->wait($plugin->getPluginId())) {
+      drupal_set_message(t('The wait is killing me. Giving up.'));
+      return;
+    }
   }
-}
   $result = $plugin->import();
   if (batch_get()) {
     drush_backend_batch_process();
