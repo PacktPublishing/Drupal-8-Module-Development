@@ -36,3 +36,14 @@ products.importer.plugin.json:
     url:
       type: uri
       label: Uri
+
+products.importer.plugin.csv:
+  type: mapping
+  label: Plugin configuration for the CSV importer plugin
+  mapping:
+    file:
+      type: sequence
+      label: File IDs
+      sequence:
+        type: integer
+        label: CSV File ID
