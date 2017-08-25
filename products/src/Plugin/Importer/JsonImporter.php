@@ -214,9 +214,7 @@ class JsonImporter extends ImporterBase {
    */
   private function handleProductImage($data, ProductInterface $product) {
     $name = $data->image;
-    // This needs to be hardcoded for the moment.
-    $image_path = '';
-    $image = file_get_contents($image_path . '/' . $name);
+    $image = file_get_contents('products://' . $name);
     if (!$image) {
       // Perhaps log something.
       return;
