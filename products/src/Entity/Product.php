@@ -214,6 +214,13 @@ class Product extends ContentEntityBase implements ProductInterface {
       ->setDisplayOptions('form', array(
         'type' => 'image_image',
         'weight' => 5,
+      ))
+      ->setDisplayOptions('view', array(
+        'type' => 'image',
+        'weight' => 10,
+        'settings' => [
+          'image_style' => 'large'
+        ]
       ));
 
     $fields['created'] = BaseFieldDefinition::create('created')
