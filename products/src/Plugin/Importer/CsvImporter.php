@@ -88,8 +88,12 @@ class CsvImporter extends ImporterBase {
       return NULL;
     }
 
+    // This is how we get the external URL based on a URI using the wrapper.
     $url = $wrapper->getExternalUrl();
-    $spl = new \SplFileObject($url, 'r');
+    // But we can also create an /SplFileObject straight with the URI and it's actually
+    // better so it works also in our testing environment which emulates the file
+    // system.
+    $spl = new \SplFileObject($file->getFileUri(), 'r');
     $data = [];
     while (!$spl->eof()) {
       $data[] = $spl->fgetcsv();
