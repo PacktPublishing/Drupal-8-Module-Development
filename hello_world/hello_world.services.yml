@@ -1,7 +1,7 @@
 services:
   hello_world.salutation:
     class: Drupal\hello_world\HelloWorldSalutation
-    arguments: ['@config.factory', '@event_dispatcher']
+    arguments: ['@config.factory', '@event_dispatcher', '@page_cache_kill_switch']
   hello_world.logger.channel.hello_world:
     parent: logger.channel_base
     arguments: ['hello_world']
