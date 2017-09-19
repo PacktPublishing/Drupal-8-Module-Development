@@ -28,4 +28,20 @@ class CalculatorTest extends UnitTestCase {
     $this->assertEquals(5, $calculator->subtract());
   }
 
+  /**
+   * Tests the Calculator::multiply() method.
+   */
+  public function testMultiply() {
+    $calculator = new Calculator(10, 5);
+    $this->assertEquals(50, $calculator->multiply());
+  }
+
+  /**
+   * Tests the Calculator::divide() method.
+   */
+  public function testDivide() {
+    $calculator = new Calculator(10, 5);
+    $this->assertEquals(2, $calculator->divide());
+  }
+
 }
