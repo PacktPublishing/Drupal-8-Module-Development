@@ -21,7 +21,7 @@ class CalculatorTest extends UnitTestCase {
   }
 
   /**
-   * Tests the Calculator::add() method.
+   * Tests the Calculator::subtract() method.
    */
   public function testSubtract() {
     $calculator = new Calculator(10, 5);
