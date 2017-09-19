@@ -1,0 +1,4 @@
+name: CSV Importer Test
+description: Used for testing the CSV Importer
+core: 8.x
+type: module
