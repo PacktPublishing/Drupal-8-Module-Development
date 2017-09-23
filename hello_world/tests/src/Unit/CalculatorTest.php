@@ -13,35 +13,54 @@ use Drupal\Tests\UnitTestCase;
 class CalculatorTest extends UnitTestCase {
 
   /**
+   * @var Calculator
+   */
+  protected $calculatorOne;
+
+  /**
+   * @var Calculator
+   */
+  protected $calculatorTwo;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+    $this->calculatorOne = new Calculator(10, 5);
+    $this->calculatorTwo = new Calculator(10, 2);
+  }
+
+  /**
    * Tests the Calculator::add() method.
    */
   public function testAdd() {
-    $calculator = new Calculator(10, 5);
-    $this->assertEquals(15, $calculator->add());
+    $this->assertEquals(15, $this->calculatorOne->add());
+    $this->assertEquals(12, $this->calculatorTwo->add());
   }
 
   /**
    * Tests the Calculator::subtract() method.
    */
   public function testSubtract() {
-    $calculator = new Calculator(10, 5);
-    $this->assertEquals(5, $calculator->subtract());
+    $this->assertEquals(5, $this->calculatorOne->subtract());
+    $this->assertEquals(8, $this->calculatorTwo->subtract());
   }
 
   /**
    * Tests the Calculator::multiply() method.
    */
   public function testMultiply() {
-    $calculator = new Calculator(10, 5);
-    $this->assertEquals(50, $calculator->multiply());
+    $this->assertEquals(50, $this->calculatorOne->multiply());
+    $this->assertEquals(20, $this->calculatorTwo->multiply());
   }
 
   /**
    * Tests the Calculator::divide() method.
    */
   public function testDivide() {
-    $calculator = new Calculator(10, 5);
-    $this->assertEquals(2, $calculator->divide());
+    $this->assertEquals(2, $this->calculatorOne->divide());
+    $this->assertEquals(5, $this->calculatorTwo->divide());
   }
 
 }

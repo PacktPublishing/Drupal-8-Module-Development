@@ -26,6 +26,7 @@ class HelloWorldPageTest extends BrowserTestBase {
   private function assertDefaultSalutation() {
     $this->drupalGet('/hello');
     $this->assertSession()->pageTextContains('Our first route');
+    $this->assertSession()->elementTextContains('css', 'h1', 'Our first route');
     $time = new \DateTime();
     $expected = '';
     if ((int) $time->format('G') >= 06 && (int) $time->format('G') < 12) {
@@ -76,7 +77,7 @@ class HelloWorldPageTest extends BrowserTestBase {
     $edit = [
       'salutation' => 'My custom salutation',
     ];
-    
+
     $this->drupalPostForm(NULL, $edit, 'op');
     $this->assertSession()->pageTextContains('The configuration options have been saved');
     $this->drupalGet('/hello');

@@ -1,15 +1,15 @@
 <?php
 
-namespace Drupal\Tests\products\FunctionalJavascript;
+namespace Drupal\Tests\hello_world\FunctionalJavascript;
 
 use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 
 /**
  * Testing the simple Javascript timer on the Hello World page.
  *
- * @group products
+ * @group hello_world
  */
-class TimeTestForm extends JavascriptTestBase {
+class TimeTest extends JavascriptTestBase {
 
   /**
    * Modules to enable.
