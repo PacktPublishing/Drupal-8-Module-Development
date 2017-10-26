@@ -5,9 +5,7 @@ Drupal 8 is a powerful web-based content management system (CMS) that can be use
 
 The purpose of this book is to talk about the most common ways a Drupal 8 website can be extended to provide new functionality. In doing so, the book will cover a number of extension points, but also illustrate many subsystems and APIs that can help you model, structure, and wire your business requirements.
 ### Instructions and Navigations
-All of the codes are present in the Project files folder.
-
-
+Given in this repository is the whole Project file which are the support files for the book.
 
 The code will look like the following:
 ```
